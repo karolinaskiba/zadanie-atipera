@@ -6,10 +6,12 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { RouterOutlet } from '@angular/router';
 import { FooterComponent } from '../../components/footer/footer.component';
 import { HeaderComponent } from '../../components/header/header.component';
-import { MatTableModule } from '@angular/material/table';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { PeriodicElement } from '../../models/periodic-element';
 import { MatIcon } from '@angular/material/icon';
 import { PeriodicElementsService } from '../../services/periodic-elements.service';
+import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-home',
@@ -27,19 +29,33 @@ import { PeriodicElementsService } from '../../services/periodic-elements.servic
     RouterOutlet,
     MatTableModule,
     MatIcon,
+    MatFormField,
+    MatFormFieldModule,
+    MatInputModule,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
 export class HomeComponent implements OnInit {
+  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+  dataSource = new MatTableDataSource<PeriodicElement>();
+  private debounceTimer: any;
+
   service = inject(PeriodicElementsService);
-  dataSource: PeriodicElement[] = [];
 
   ngOnInit(): void {
     this.service.allData.subscribe({
-      next: (data) => (this.dataSource = data),
+      next: (data) => (this.dataSource.data = data),
     });
   }
 
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+  applyFilter(event: Event) {
+    clearTimeout(this.debounceTimer);
+    const input = event.target as HTMLInputElement;
+    const filterValue = input.value;
+
+    this.debounceTimer = setTimeout(() => {
+      this.dataSource.filter = filterValue;
+    }, 2000);
+  }
 }

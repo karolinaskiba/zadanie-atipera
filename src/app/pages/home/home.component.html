@@ -13,6 +13,10 @@
 
   <mat-sidenav-content class="padding">
     <h2>Periodic Elements</h2>
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Filter" />
+    </mat-form-field>
+
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
       <!--- Note that these columns can be defined in any order.
               The actual rendered columns are set as a property on the row definition" -->
