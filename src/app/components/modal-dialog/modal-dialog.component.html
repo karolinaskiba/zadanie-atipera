@@ -17,8 +17,8 @@
   </mat-form-field>
 </mat-dialog-content>
 <div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">Cancel</button>
-  <button mat-flat-button cdkFocusInitial [mat-dialog-close]="element()">
-    Update
+  <button mat-button (click)="onNoClick()" [mat-dialog-close]="true">
+    Cancel
   </button>
+  <button mat-flat-button [mat-dialog-close]="element()" submit>Update</button>
 </div>

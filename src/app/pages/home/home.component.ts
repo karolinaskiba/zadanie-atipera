@@ -49,7 +49,12 @@ export class HomeComponent implements OnInit {
   ];
   dataSource = new MatTableDataSource<PeriodicElement>();
   private debounceTimer: any;
-  element: any;
+  element = signal<PeriodicElement>({
+    name: '',
+    symbol: '',
+    position: 0,
+    weight: 0,
+  });
 
   service = inject(PeriodicElementsService);
   dialog = inject(MatDialog);
@@ -72,11 +77,21 @@ export class HomeComponent implements OnInit {
 
   editRow(element: PeriodicElement) {
     const dialogRef = this.dialog.open(ModalDialogComponent, {
-      data: element,
+      data: { ...element },
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      this.element = element;
+      if (result) {
+        console.log('result: ', result);
+        const index = this.dataSource.data.findIndex(
+          (el) => el.position === element.position
+        );
+        if (index !== -1) {
+          this.dataSource.data[index] = result;
+          this.dataSource = new MatTableDataSource(this.dataSource.data);
+        }
+        this.element.set(result);
+      }
     });
   }
 }

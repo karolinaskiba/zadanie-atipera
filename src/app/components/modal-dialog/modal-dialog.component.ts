@@ -35,6 +35,9 @@ export class ModalDialogComponent {
   readonly data = inject<PeriodicElement>(MAT_DIALOG_DATA);
   readonly element = model(this.data);
 
+  updateElement() {
+    console.log('update', this.element);
+  }
   onNoClick(): void {
     this.dialogRef.close();
   }
