@@ -12,6 +12,8 @@ import { MatIcon } from '@angular/material/icon';
 import { PeriodicElementsService } from '../../services/periodic-elements.service';
 import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { MatDialog } from '@angular/material/dialog';
+import { ModalDialogComponent } from '../../components/modal-dialog/modal-dialog.component';
 
 @Component({
   selector: 'app-home',
@@ -32,16 +34,25 @@ import { MatInputModule } from '@angular/material/input';
     MatFormField,
     MatFormFieldModule,
     MatInputModule,
+    ModalDialogComponent,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
 export class HomeComponent implements OnInit {
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+  displayedColumns: string[] = [
+    'position',
+    'name',
+    'weight',
+    'symbol',
+    'action',
+  ];
   dataSource = new MatTableDataSource<PeriodicElement>();
   private debounceTimer: any;
+  element: any;
 
   service = inject(PeriodicElementsService);
+  dialog = inject(MatDialog);
 
   ngOnInit(): void {
     this.service.allData.subscribe({
@@ -57,5 +68,15 @@ export class HomeComponent implements OnInit {
     this.debounceTimer = setTimeout(() => {
       this.dataSource.filter = filterValue;
     }, 2000);
+  }
+
+  editRow(element: PeriodicElement) {
+    const dialogRef = this.dialog.open(ModalDialogComponent, {
+      data: element,
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      this.element = element;
+    });
   }
 }
