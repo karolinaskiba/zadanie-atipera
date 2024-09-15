@@ -82,7 +82,6 @@ export class HomeComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        console.log('result: ', result);
         const index = this.dataSource.data.findIndex(
           (el) => el.position === element.position
         );
