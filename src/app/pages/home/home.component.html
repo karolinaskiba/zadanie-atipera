@@ -8,33 +8,45 @@
       </button>
     </div>
 
-    <mat-nav-list> Menu </mat-nav-list>
+    <mat-nav-list> </mat-nav-list>
   </mat-sidenav>
 
   <mat-sidenav-content class="padding">
-    <h2>Periodic Elements</h2>
+    <h2>{{ "title.app" | translate }}</h2>
     <mat-form-field>
-      <input matInput (keyup)="applyFilter($event)" placeholder="Filter" />
+      <input
+        matInput
+        (keyup)="applyFilter($event)"
+        [placeholder]="'labels.filter' | translate"
+      />
     </mat-form-field>
 
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
       <ng-container matColumnDef="position">
-        <th mat-header-cell *matHeaderCellDef>Number</th>
+        <th mat-header-cell *matHeaderCellDef>
+          {{ "columns.number" | translate }}
+        </th>
         <td mat-cell *matCellDef="let element">{{ element.position }}</td>
       </ng-container>
 
       <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef>Name</th>
+        <th mat-header-cell *matHeaderCellDef>
+          {{ "columns.name" | translate }}
+        </th>
         <td mat-cell *matCellDef="let element">{{ element.name }}</td>
       </ng-container>
 
       <ng-container matColumnDef="weight">
-        <th mat-header-cell *matHeaderCellDef>Weight</th>
+        <th mat-header-cell *matHeaderCellDef>
+          {{ "columns.weight" | translate }}
+        </th>
         <td mat-cell *matCellDef="let element">{{ element.weight }}</td>
       </ng-container>
 
       <ng-container matColumnDef="symbol">
-        <th mat-header-cell *matHeaderCellDef>Symbol</th>
+        <th mat-header-cell *matHeaderCellDef>
+          {{ "columns.symbol" | translate }}
+        </th>
         <td mat-cell *matCellDef="let element">{{ element.symbol }}</td>
       </ng-container>
 

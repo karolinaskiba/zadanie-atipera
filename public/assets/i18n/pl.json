@@ -1,0 +1,23 @@
+{
+  "title": {
+    "app": "Pierwiastki"
+  },
+  "labels": {
+    "filter": "Filtruj",
+    "name": "Nazwa",
+    "number": "Numer",
+    "weight": "Waga",
+    "symbol": "Symbol"
+  },
+  "columns": {
+    "name": "Nazwa",
+    "number": "Numer",
+    "weight": "Waga",
+    "symbol": "Symbol"
+  },
+
+  "btn": {
+    "cancel": "Anuluj",
+    "ubdate": "Aktualizuj"
+  }
+}

@@ -1,24 +1,42 @@
 <mat-dialog-content>
   <mat-form-field>
-    <mat-label>Position</mat-label>
-    <input matInput [(ngModel)]="data.position" placeholder="Position" />
+    <mat-label>{{ "labels.number" | translate }}</mat-label>
+    <input
+      matInput
+      [(ngModel)]="data.position"
+      [placeholder]="'labels.number' | translate"
+    />
   </mat-form-field>
   <mat-form-field>
-    <mat-label>Name</mat-label>
-    <input matInput [(ngModel)]="data.name" placeholder="Name" />
+    <mat-label>{{ "labels.name" | translate }}</mat-label>
+    <input
+      matInput
+      [(ngModel)]="data.name"
+      [placeholder]="'labels.name' | translate"
+    />
   </mat-form-field>
   <mat-form-field>
-    <mat-label>Symbol</mat-label>
-    <input matInput [(ngModel)]="data.symbol" placeholder="Symbol" />
+    <mat-label>{{ "labels.symbol" | translate }}</mat-label>
+    <input
+      matInput
+      [(ngModel)]="data.symbol"
+      [placeholder]="'labels.symbol' | translate"
+    />
   </mat-form-field>
   <mat-form-field>
-    <mat-label>Wight</mat-label>
-    <input matInput [(ngModel)]="data.weight" placeholder="Wight" />
+    <mat-label>{{ "labels.weight" | translate }}</mat-label>
+    <input
+      matInput
+      [(ngModel)]="data.weight"
+      [placeholder]="'labels.weight' | translate"
+    />
   </mat-form-field>
 </mat-dialog-content>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()" [mat-dialog-close]="true">
-    Cancel
+    {{ "btn.cancel" | translate }}
   </button>
-  <button mat-flat-button [mat-dialog-close]="element()" submit>Update</button>
+  <button mat-flat-button [mat-dialog-close]="element()" submit>
+    {{ "btn.ubdate" | translate }}
+  </button>
 </div>

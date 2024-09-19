@@ -13,6 +13,7 @@ import {
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { PeriodicElement } from '../../models/periodic-element';
+import { TranslateModule } from '@ngx-translate/core';
 @Component({
   selector: 'app-modal-dialog',
   standalone: true,
@@ -25,6 +26,7 @@ import { PeriodicElement } from '../../models/periodic-element';
     MatDialogTitle,
     MatDialogActions,
     MatDialogClose,
+    TranslateModule,
   ],
 
   templateUrl: './modal-dialog.component.html',

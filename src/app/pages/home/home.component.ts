@@ -14,6 +14,7 @@ import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalDialogComponent } from '../../components/modal-dialog/modal-dialog.component';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-home',
@@ -35,6 +36,7 @@ import { ModalDialogComponent } from '../../components/modal-dialog/modal-dialog
     MatFormFieldModule,
     MatInputModule,
     ModalDialogComponent,
+    TranslateModule,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
