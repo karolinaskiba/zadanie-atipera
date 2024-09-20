@@ -1,6 +1,8 @@
 import { Injectable, signal } from '@angular/core';
 import { PeriodicElement } from '../models/periodic-element';
 import { of } from 'rxjs';
+import { rxState } from '@rx-angular/state';
+import { RxFor } from '@rx-angular/template/for';
 
 const ELEMENT_DATA: PeriodicElement[] = [
   { position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H' },
@@ -20,7 +22,10 @@ const ELEMENT_DATA: PeriodicElement[] = [
 export class PeriodicElementsService {
   private data = signal<PeriodicElement[]>(ELEMENT_DATA);
 
-  get allData() {
-    return of(this.data());
-  }
+  private state = rxState<{ data: PeriodicElement[] }>(({ set, connect }) => {
+    set({ data: [] });
+    connect('data', this.data);
+  });
+
+  periodicElements = this.state.signal('data');
 }

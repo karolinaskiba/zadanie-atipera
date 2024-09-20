@@ -14,7 +14,8 @@ import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatDialog } from '@angular/material/dialog';
 import { ModalDialogComponent } from '../../components/modal-dialog/modal-dialog.component';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslateModule } from '@ngx-translate/core';
+import { RxState } from '@rx-angular/state';
 
 @Component({
   selector: 'app-home',
@@ -40,6 +41,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
+  providers: [RxState],
 })
 export class HomeComponent implements OnInit {
   displayedColumns: string[] = [
@@ -62,9 +64,7 @@ export class HomeComponent implements OnInit {
   dialog = inject(MatDialog);
 
   ngOnInit(): void {
-    this.service.allData.subscribe({
-      next: (data) => (this.dataSource.data = data),
-    });
+    this.dataSource.data = this.service.periodicElements();
   }
 
   applyFilter(event: Event) {
