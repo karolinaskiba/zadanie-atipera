@@ -13,6 +13,13 @@
 
   <mat-sidenav-content class="padding">
     <h2>{{ "title.app" | translate }}</h2>
+
+    @if(!dataSource){
+
+    <p class="text-center">{{ "message.any-data-to-show" | translate }}</p>
+
+    } @else {
+
     <mat-form-field>
       <input
         matInput
@@ -20,6 +27,7 @@
         [placeholder]="'labels.filter' | translate"
       />
     </mat-form-field>
+    @if(tableVisibile){
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
       <ng-container matColumnDef="position">
         <th mat-header-cell *matHeaderCellDef>
@@ -59,6 +67,11 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
     </table>
+
+    } @else {
+    <p class="text-center">{{ "message.no-data-found" | translate }}</p>
+
+    } }
   </mat-sidenav-content>
 </mat-sidenav-container>
 

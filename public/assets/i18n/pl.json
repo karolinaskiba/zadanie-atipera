@@ -9,6 +9,10 @@
     "weight": "Waga",
     "symbol": "Symbol"
   },
+  "message": {
+    "any-data-to-show": "Brak danych do pokazania",
+    "no-data-found": "Brak wyników wyszukiwania"
+  },
   "columns": {
     "name": "Nazwa",
     "number": "Numer",

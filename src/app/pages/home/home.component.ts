@@ -54,7 +54,11 @@ export class HomeComponent implements OnInit {
     'action',
   ];
   dataSource = new MatTableDataSource<PeriodicElement>();
+  service = inject(PeriodicElementsService);
+  dialog = inject(MatDialog);
 
+  spinnervisibile: boolean = false;
+  tableVisibile: boolean = true;
   private debounceTimer: any;
   element = signal<PeriodicElement>({
     name: '',
@@ -63,23 +67,22 @@ export class HomeComponent implements OnInit {
     weight: 0,
   });
 
-  service = inject(PeriodicElementsService);
-  dialog = inject(MatDialog);
-  spinnervisibile: boolean = false;
-
   ngOnInit(): void {
     this.dataSource.data = this.service.periodicElements();
   }
 
   applyFilter(event: Event) {
     this.spinnervisibile = true;
+
     clearTimeout(this.debounceTimer);
+
     const input = event.target as HTMLInputElement;
     const filterValue = input.value;
 
     this.debounceTimer = setTimeout(() => {
       this.dataSource.filter = filterValue;
       this.spinnervisibile = false;
+      this.tableVisibile = !!this.dataSource.filteredData.length;
     }, 2000);
   }
 
