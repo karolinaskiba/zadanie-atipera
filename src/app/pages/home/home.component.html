@@ -20,7 +20,6 @@
         [placeholder]="'labels.filter' | translate"
       />
     </mat-form-field>
-
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
       <ng-container matColumnDef="position">
         <th mat-header-cell *matHeaderCellDef>
@@ -63,4 +62,9 @@
   </mat-sidenav-content>
 </mat-sidenav-container>
 
+@if(spinnervisibile){
+<div class="spinner">
+  <mat-spinner diameter="50"></mat-spinner>
+</div>
+}
 <app-footer />

@@ -16,6 +16,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ModalDialogComponent } from '../../components/modal-dialog/modal-dialog.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { RxState } from '@rx-angular/state';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-home',
@@ -38,6 +39,7 @@ import { RxState } from '@rx-angular/state';
     MatInputModule,
     ModalDialogComponent,
     TranslateModule,
+    MatProgressSpinnerModule,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
@@ -52,6 +54,7 @@ export class HomeComponent implements OnInit {
     'action',
   ];
   dataSource = new MatTableDataSource<PeriodicElement>();
+
   private debounceTimer: any;
   element = signal<PeriodicElement>({
     name: '',
@@ -62,18 +65,21 @@ export class HomeComponent implements OnInit {
 
   service = inject(PeriodicElementsService);
   dialog = inject(MatDialog);
+  spinnervisibile: boolean = false;
 
   ngOnInit(): void {
     this.dataSource.data = this.service.periodicElements();
   }
 
   applyFilter(event: Event) {
+    this.spinnervisibile = true;
     clearTimeout(this.debounceTimer);
     const input = event.target as HTMLInputElement;
     const filterValue = input.value;
 
     this.debounceTimer = setTimeout(() => {
       this.dataSource.filter = filterValue;
+      this.spinnervisibile = false;
     }, 2000);
   }
 
